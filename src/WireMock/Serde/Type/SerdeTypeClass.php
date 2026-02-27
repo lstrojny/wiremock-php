@@ -263,7 +263,10 @@ class SerdeTypeClass extends SerdeTypeSingle
             $propertyValue = $serdeProp->instantiateAndConsumeData($data, $path);
             $refClass = new ReflectionClass($serdeProp->owningClassName);
             $refProp = $refClass->getProperty($serdeProp->name);
-            $refProp->setAccessible(true);
+            if (PHP_VERSION_ID < 80100)
+            {
+                $refProp->setAccessible(true);
+            }
             $refProp->setValue($object, $propertyValue);
         }
     }

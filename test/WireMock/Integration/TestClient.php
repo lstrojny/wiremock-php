@@ -27,7 +27,9 @@ class TestClient
 
         $result = $this->_makeTimedRequest($ch);
 
-        curl_close($ch);
+        if (PHP_VERSION_ID < 80000) {
+            curl_close($ch);
+        }
 
         return $result;
     }
@@ -41,7 +43,9 @@ class TestClient
 
         $result = $this->_makeTimedRequest($ch);
 
-        curl_close($ch);
+        if (PHP_VERSION_ID < 80000) {
+            curl_close($ch);
+        }
 
         return $result;
     }

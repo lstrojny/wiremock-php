@@ -481,7 +481,10 @@ class StubbingIntegrationTest extends WireMockIntegrationTest
         // same before asserting
         $matchingStrat = $stubMapping->getRequest()->getHeaders()['X-Munged-Date'];
         $matchValProp = new \ReflectionProperty($matchingStrat, 'matchingValue');
-        $matchValProp->setAccessible(true);
+        if (PHP_VERSION_ID < 80100)
+        {
+            $matchValProp->setAccessible(true);
+        }
         $matchValProp->setValue($matchingStrat, 'now +0 seconds');
         assertThatTheOnlyMappingPresentIs($stubMapping);
     }
@@ -509,7 +512,10 @@ class StubbingIntegrationTest extends WireMockIntegrationTest
         // same before asserting
         $matchingStrat = $stubMapping->getRequest()->getHeaders()['X-Munged-Date'];
         $matchValProp = new \ReflectionProperty($matchingStrat, 'matchingValue');
-        $matchValProp->setAccessible(true);
+        if (PHP_VERSION_ID < 80100)
+        {
+            $matchValProp->setAccessible(true);
+        }
         $matchValProp->setValue($matchingStrat, 'now +0 seconds');
         assertThatTheOnlyMappingPresentIs($stubMapping);
     }
@@ -537,7 +543,10 @@ class StubbingIntegrationTest extends WireMockIntegrationTest
         // same before asserting
         $matchingStrat = $stubMapping->getRequest()->getHeaders()['X-Munged-Date'];
         $matchValProp = new \ReflectionProperty($matchingStrat, 'matchingValue');
-        $matchValProp->setAccessible(true);
+        if (PHP_VERSION_ID < 80100)
+        {
+            $matchValProp->setAccessible(true);
+        }
         $matchValProp->setValue($matchingStrat, 'now +0 seconds');
         assertThatTheOnlyMappingPresentIs($stubMapping);
     }
@@ -555,10 +564,16 @@ class StubbingIntegrationTest extends WireMockIntegrationTest
         // mapping to be the same before asserting
         $matchingStrat = $stubMapping->getRequest()->getHeaders()['X-Munged-Date'];
         $matchValProp = new \ReflectionProperty($matchingStrat, 'matchingValue');
-        $matchValProp->setAccessible(true);
+        if (PHP_VERSION_ID < 80100)
+        {
+            $matchValProp->setAccessible(true);
+        }
         $matchValProp->setValue($matchingStrat, 'now +3 days');
         $expectedOffsetProp = new \ReflectionProperty($matchingStrat, 'expectedOffset');
-        $expectedOffsetProp->setAccessible(true);
+        if (PHP_VERSION_ID < 80100)
+        {
+            $expectedOffsetProp->setAccessible(true);
+        }
         $expectedOffsetProp->setValue($matchingStrat, null);
         assertThatTheOnlyMappingPresentIs($stubMapping);
     }
@@ -796,7 +811,10 @@ class StubbingIntegrationTest extends WireMockIntegrationTest
         // have that defaulted to ANY. Our public API doesn't allow that modification, so we make some cheeky
         // changes via reflection before asserting.
         $methodProp = new \ReflectionProperty($stubMapping->getRequest(), 'method');
-        $methodProp->setAccessible(true);
+        if (PHP_VERSION_ID < 80100)
+        {
+            $methodProp->setAccessible(true);
+        }
         $methodProp->setValue($stubMapping->getRequest(), 'ANY');
         assertThatTheOnlyMappingPresentIs($stubMapping);
         $customMatcher = $stubMapping->getRequest()->getCustomMatcher();
@@ -848,7 +866,10 @@ class StubbingIntegrationTest extends WireMockIntegrationTest
         // The stub mapping will be marked as persistent by the server, so we update the locally created version to
         // match before asserting
         $persistentProp = new \ReflectionProperty($stubMapping, 'persistent');
-        $persistentProp->setAccessible(true);
+        if (PHP_VERSION_ID < 80100)
+        {
+            $persistentProp->setAccessible(true);
+        }
         $persistentProp->setValue($stubMapping, true);
         assertThatTheOnlyMappingPresentIs($stubMapping);
     }

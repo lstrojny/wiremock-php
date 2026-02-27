@@ -70,7 +70,10 @@ class SerdeProp
     public function getData(object $object)
     {
         $refProp = new ReflectionProperty($this->owningClassName, $this->name);
-        $refProp->setAccessible(true);
+        if (PHP_VERSION_ID < 80100)
+        {
+            $refProp->setAccessible(true);
+        }
         return $refProp->getValue($object);
     }
 

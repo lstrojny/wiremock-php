@@ -36,7 +36,10 @@ class SerdeClassDiscriminationInfo
     public function getDiscriminator(): ?ClassDiscriminator
     {
         $refMethod = MethodFactory::createMethod($this->discriminatorFactoryName);
-        $refMethod->setAccessible(true);
+        if (PHP_VERSION_ID < 80100)
+        {
+            $refMethod->setAccessible(true);
+        }
         return $refMethod->invoke(null);
     }
 
